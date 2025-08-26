@@ -1,0 +1,26 @@
+{
+  "name": "q-templates-review",
+  "version": "1.0.0",
+  "description": "Module to serve the \"request-a-review\" template",
+  "main": "dist/template.json",
+  "engines": {
+    "npm": ">=8.5.2",
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "pretest": "npm run build",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "build": "node ./src/build.js",
+    "prepare": "npm run build --silent",
+    "dev": "nodemon -L -e .js,.json,.njk,.yml --ignore dist/template.json --exec npm run build"
+  },
+  "author": "Barry Piccinni",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.0.5",
+    "q-template-validator": "github:CriminalInjuriesCompensationAuthority/q-template-validator#bp-feature/request-a-review"
+  }
+}
