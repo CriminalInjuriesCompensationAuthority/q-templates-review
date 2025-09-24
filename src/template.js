@@ -55,19 +55,10 @@ module.exports = {
         data: [
             {
                 id: 'task1',
-                type: 'transformAndUpload',
+                type: 'transformAndUploadPdf',
                 retries: 0,
                 data: {
                     questionnaireDef: '$.questionnaireDef',
-                    logger: '$.logger'
-                }
-            },
-            {
-                id: 'task2',
-                type: 'sendSubmissionMessageToSQS',
-                retries: 0,
-                data: {
-                    questionnaire: '$.questionnaireDef',
                     logger: '$.logger'
                 }
             }
