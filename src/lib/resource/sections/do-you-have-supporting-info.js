@@ -63,7 +63,7 @@ module.exports = {
                     ]
                 },
                 {
-                    target: 'p--review-check-your-answers'
+                    target: 'p--check-your-answers'
                 }
             ]
         }

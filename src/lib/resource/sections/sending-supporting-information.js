@@ -9,7 +9,8 @@ module.exports = {
             properties: {
                 'context-sending-supporting-info': {
                     title: 'Sending supporting information',
-                    description: '<p class="govuk-body">If you want to send us supporting information, do this by post.</p>'
+                    description:
+                        '<p class="govuk-body">If you want to send us supporting information, do this by post.</p>'
                 }
             },
             meta: {
@@ -27,7 +28,7 @@ module.exports = {
         on: {
             ANSWER: [
                 {
-                    target: 'p--review-check-your-answers'
+                    target: 'p--check-your-answers'
                 }
             ]
         }

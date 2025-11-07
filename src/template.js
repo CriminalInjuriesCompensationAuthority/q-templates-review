@@ -5,7 +5,7 @@ const {version} = require('../package.json');
 const askForReview = require('./lib/resource/sections/ask-for-a-review');
 const decisionLetter = require('./lib/resource/sections/decision-letter');
 const doYouHaveSupportingInfo = require('./lib/resource/sections/do-you-have-supporting-info');
-const reviewCheckYourAnswers = require('./lib/resource/sections/review-check-your-answers');
+const checkYourAnswers = require('./lib/resource/sections/check-your-answers');
 const reviewConfirmation = require('./lib/resource/sections/review-confirmation');
 const sendingSupportingInfo = require('./lib/resource/sections/sending-supporting-information');
 const whyDoYouWantReview = require('./lib/resource/sections/why-do-you-want-a-review');
@@ -19,7 +19,7 @@ module.exports = {
         'p--ask-for-a-review': askForReview.section,
         'p--decision-letter': decisionLetter.section,
         'p--do-you-have-supporting-info': doYouHaveSupportingInfo.section,
-        'p--review-check-your-answers': reviewCheckYourAnswers.section,
+        'p--check-your-answers': checkYourAnswers.section,
         'p--review-confirmation': reviewConfirmation.section,
         'p--sending-supporting-information': sendingSupportingInfo.section,
         'p--why-do-you-want-a-review': whyDoYouWantReview.section,
@@ -30,15 +30,13 @@ module.exports = {
     routes: {
         initial: 'p--decision-letter',
         referrer: 'https://www.gov.uk/claim-compensation-criminal-injury/make-claim',
-        summary: [
-            'p--review-check-your-answers'
-        ],
+        summary: ['p--check-your-answers'],
         confirmation: 'p--review-confirmation',
         states: {
             'p--ask-for-a-review': askForReview.route,
             'p--decision-letter': decisionLetter.route,
             'p--do-you-have-supporting-info': doYouHaveSupportingInfo.route,
-            'p--review-check-your-answers': reviewCheckYourAnswers.route,
+            'p--check-your-answers': checkYourAnswers.route,
             'p--review-confirmation': reviewConfirmation.route,
             'p--sending-supporting-information': sendingSupportingInfo.route,
             'p--why-do-you-want-a-review': whyDoYouWantReview.route,
@@ -55,7 +53,7 @@ module.exports = {
         data: [
             {
                 id: 'task1',
-                type: 'transformAndUploadPdf',
+                type: 'transformAndUpload',
                 retries: 0,
                 data: {
                     questionnaireDef: '$.questionnaireDef',
@@ -78,6 +76,5 @@ module.exports = {
         questionnaireDocumentVersion: '5.0.0',
         attributes: {}
     },
-    attributes: {
-    }
+    attributes: {}
 };
