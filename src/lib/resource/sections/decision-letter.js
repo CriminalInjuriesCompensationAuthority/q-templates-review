@@ -54,7 +54,8 @@ module.exports = {
                 }
             ],
             options: {
-                buttonText: 'Ask for a review'
+                buttonText: 'Ask for a review',
+                showSurvey: true
             }
         }
     },
