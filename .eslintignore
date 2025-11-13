@@ -1,6 +1,5 @@
 #! m0-start
-/node_modules
+coverage
 stuff
 #! m0-end
 
-dist
