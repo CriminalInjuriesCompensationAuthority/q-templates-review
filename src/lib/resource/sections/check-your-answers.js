@@ -9,36 +9,39 @@ module.exports = {
             properties: {
                 'p-check-your-answers': {
                     title: 'Confirm your answers',
+                    description: 'Confirm your answers',
                     type: 'object',
                     properties: {
                         summaryInfo: {
                             type: 'object',
-                            urlPath: 'claim',
+                            urlPath: 'apply',
                             editAnswerText: 'Change',
                             summaryStructure: [],
-                            lookup: {}
-                        }
-                    }
-                }
+                            lookup: {},
+                        },
+                    },
+                },
             },
             examples: [{}],
             invalidExamples: [
                 {
-                    foo: 'bar'
-                }
+                    foo: 'bar',
+                },
             ],
             options: {
-                ordering: {}
-            }
-        }
+                ordering: {},
+                buttonText: 'Accept and send',
+                pageContext: 'submission',
+            },
+        },
     },
     route: {
         on: {
             ANSWER: [
                 {
-                    target: 'p--review-confirmation'
-                }
-            ]
-        }
-    }
+                    target: 'p--review-confirmation',
+                },
+            ],
+        },
+    },
 };

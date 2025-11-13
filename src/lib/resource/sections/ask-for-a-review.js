@@ -8,39 +8,31 @@ module.exports = {
             additionalProperties: false,
             properties: {
                 'ask-for-a-review': {
-                    title: 'Ask for a review',
+                    title: "What we'll ask you",
                     description: `
-                        <p class="govuk-body">We\'re going to ask about your reasons for asking for a review</p>
-                        <p class="govuk-body">This will include if you want to send us supporting information along with your review.  
-                        <p class="govuk-body">You may want to ask for a review if you:</p>
-                        <ul class='govuk-list govuk-list--bullet'>
-                        <li>do not think we’ve considered all the information you gave us</li>
-                        <li>think we’ve looked at the wrong information</li>
-                        <li>have any extra information you’d like to give us</li>
-                        <li>think our decision was wrong for another reason</li>
-                        </ul>
-                        <p class="govuk-body">If your case is reviewed, a different person will review it. They might make the same decision or a different one.</p>
-                        `
-                }
+                        <p class="govuk-body">We need to find out more about why you would like us to review our decision about your claim.</p>
+                        <p class="govuk-body">To do this we'll ask for your reasons for wanting a review. We'll also ask if you have any supporting information to send us.</p>
+                        `,
+                },
             },
             meta: {
-                pageType: 'context'
+                pageType: 'context',
             },
             examples: [{}],
             invalidExamples: [
                 {
-                    foo: 'bar'
-                }
-            ]
-        }
+                    foo: 'bar',
+                },
+            ],
+        },
     },
     route: {
         on: {
             ANSWER: [
                 {
-                    target: 'p--why-do-you-want-a-review'
-                }
-            ]
-        }
-    }
+                    target: 'p--why-do-you-want-a-review',
+                },
+            ],
+        },
+    },
 };

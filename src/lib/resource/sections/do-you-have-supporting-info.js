@@ -11,45 +11,47 @@ module.exports = {
                 'q--supporting-info': {
                     type: 'boolean',
                     title: 'Do you have supporting information you want to send us?',
+                    description:
+                        "This could be any information you think is relevant. Do not send us anything you've sent us before.",
                     oneOf: [
                         {
                             title: 'Yes',
-                            const: true
+                            const: true,
                         },
                         {
                             title: 'No',
-                            const: false
-                        }
+                            const: false,
+                        },
                     ],
                     meta: {
                         classifications: {
-                            theme: 'request-a-review'
+                            theme: 'request-a-review',
                         },
                         summary: {
-                            title: 'Do you have supporting information?'
-                        }
-                    }
-                }
+                            title: 'Do you have supporting information?',
+                        },
+                    },
+                },
             },
             errorMessage: {
                 required: {
-                    'q--supporting-info': 'Do you have supporting information?'
-                }
+                    'q--supporting-info': 'Do you have supporting information?',
+                },
             },
             examples: [
                 {
-                    'q--supporting-info': true
+                    'q--supporting-info': true,
                 },
                 {
-                    'q--supporting-info': false
-                }
+                    'q--supporting-info': false,
+                },
             ],
             invalidExamples: [
                 {
-                    'q--supporting-info': 'foo'
-                }
-            ]
-        }
+                    'q--supporting-info': 'foo',
+                },
+            ],
+        },
     },
     route: {
         on: {
@@ -59,13 +61,13 @@ module.exports = {
                     cond: [
                         '==',
                         '$.answers.p--do-you-have-supporting-info.q--supporting-info',
-                        true
-                    ]
+                        true,
+                    ],
                 },
                 {
-                    target: 'p--check-your-answers'
-                }
-            ]
-        }
-    }
+                    target: 'p--check-your-answers',
+                },
+            ],
+        },
+    },
 };
