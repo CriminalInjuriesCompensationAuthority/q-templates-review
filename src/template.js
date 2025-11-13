@@ -59,6 +59,41 @@ module.exports = {
                     questionnaireDef: '$.questionnaireDef',
                     logger: '$.logger'
                 }
+            },
+            {
+                id: 'task2',
+                type: 'sendSubmissionMessageToSQS',
+                retries: 0,
+                data: {
+                    questionnaire: '$.questionnaireDef',
+                    logger: '$.logger'
+                }
+            },
+            {
+                id: 'task3',
+                type: 'sendNotifyMessageToSQS',
+                retries: 0,
+                data: {
+                    questionnaire: '$.questionnaireDef',
+                    logger: '$.logger'
+                }
+            }
+        ]
+    },
+    onCreate: {
+        id: 'task0',
+        type: 'sequential',
+        retries: 0,
+        data: [
+            {
+                id: 'task1',
+                type: 'sendNotifyMessageToSQS',
+                retries: 0,
+                data: {
+                    questionnaire: '$.questionnaireDef',
+                    logger: '$.logger',
+                    type: '$.type'
+                }
             }
         ]
     },
@@ -74,7 +109,74 @@ module.exports = {
     },
     meta: {
         questionnaireDocumentVersion: '5.0.0',
-        attributes: {}
+        onCreate: {
+            actions: [
+                {
+                    description: 'Decision notification email',
+                    type: 'sendEmail',
+                    cond: ['==', '$.meta.personalisation.contact-method', 'email'],
+                    // prettier-ignore
+                    data: {
+                        templateId: '',
+                        emailAddress:
+                            '||/meta/personalisation/email-address||',
+                        personalisation: {
+                            caseReference: '||/answers/system/case-reference||'
+                        },
+                        reference: null
+                    }
+                },
+                {
+                    description: 'Decision notification sms',
+                    type: 'sendSms',
+                    cond: ['==', '$.meta.personalisation.contact-method', 'sms'],
+                    // prettier-ignore
+                    data: {
+                        templateId: '',
+                        emailAddress:
+                            '||/meta/personalisation/telephone-number||',
+                        personalisation: {
+                            caseReference: '||/answers/system/case-reference||'
+                        },
+                        reference: null
+                    }
+                }
+            ]
+        },
+        onComplete: {
+            actions: [
+                {
+                    description: 'Review confirmation email',
+                    type: 'sendEmail',
+                    cond: ['==', '$.meta.personalisation.contact-method', 'email'],
+                    // prettier-ignore
+                    data: {
+                        templateId: '',
+                        emailAddress:
+                            '||/meta/personalisation/email-address||',
+                        personalisation: {
+                            caseReference: '||/answers/system/case-reference||'
+                        },
+                        reference: null
+                    }
+                },
+                {
+                    description: 'Review confirmation email',
+                    type: 'sendEmail',
+                    cond: ['==', '$.meta.personalisation.contact-method', 'sms'],
+                    // prettier-ignore
+                    data: {
+                        templateId: '',
+                        emailAddress:
+                            '||/meta/personalisation/telephone-number||',
+                        personalisation: {
+                            caseReference: '||/answers/system/case-reference||'
+                        },
+                        reference: null
+                    }
+                }
+            ]
+        }
     },
     attributes: {}
 };
