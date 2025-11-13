@@ -4,3 +4,7 @@ stuff
 #! m0-end
 
 dist
+
+#Cucumber tests
+behaviours/env/default/test.secrets.js
+behaviours/reports/*
