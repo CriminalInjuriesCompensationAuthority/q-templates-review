@@ -28,7 +28,9 @@ module.exports = {
                 }
             ],
             options: {
-                ordering: {}
+                ordering: {},
+                buttonText: 'Accept and send',
+                pageContext: 'submission'
             }
         }
     },
