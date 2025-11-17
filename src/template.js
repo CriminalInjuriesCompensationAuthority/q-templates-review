@@ -25,7 +25,7 @@ module.exports = {
         'p--why-do-you-want-a-review': whyDoYouWantReview.section,
         system: system.section,
         owner: owner.section,
-        origin: origin.section
+        origin: origin.section,
     },
     routes: {
         initial: 'p--decision-letter',
@@ -42,8 +42,8 @@ module.exports = {
             'p--why-do-you-want-a-review': whyDoYouWantReview.route,
             system: system.route,
             owner: owner.route,
-            origin: origin.route
-        }
+            origin: origin.route,
+        },
     },
     answers: {},
     onSubmit: {
@@ -57,8 +57,8 @@ module.exports = {
                 retries: 0,
                 data: {
                     questionnaireDef: '$.questionnaireDef',
-                    logger: '$.logger'
-                }
+                    logger: '$.logger',
+                },
             },
             {
                 id: 'task2',
@@ -66,8 +66,8 @@ module.exports = {
                 retries: 0,
                 data: {
                     questionnaire: '$.questionnaireDef',
-                    logger: '$.logger'
-                }
+                    logger: '$.logger',
+                },
             },
             {
                 id: 'task3',
@@ -75,37 +75,20 @@ module.exports = {
                 retries: 0,
                 data: {
                     questionnaire: '$.questionnaireDef',
-                    logger: '$.logger'
-                }
-            }
-        ]
-    },
-    onCreate: {
-        id: 'task0',
-        type: 'sequential',
-        retries: 0,
-        data: [
-            {
-                id: 'task1',
-                type: 'sendNotifyMessageToSQS',
-                retries: 0,
-                data: {
-                    questionnaire: '$.questionnaireDef',
                     logger: '$.logger',
-                    type: '$.type'
-                }
-            }
-        ]
+                },
+            },
+        ],
     },
     progress: ['p--decision-letter'],
     taxonomies: {
         theme: {
             taxa: {
                 'request-a-review': {
-                    title: 'Request a review'
-                }
-            }
-        }
+                    title: 'Request a review',
+                },
+            },
+        },
     },
     meta: {
         questionnaireDocumentVersion: '5.0.0',
@@ -124,7 +107,7 @@ module.exports = {
                             caseReference: '||/answers/system/case-reference||'
                         },
                         reference: null
-                    }
+                    },
                 },
                 {
                     description: 'Decision notification sms',
@@ -139,9 +122,9 @@ module.exports = {
                             caseReference: '||/answers/system/case-reference||'
                         },
                         reference: null
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         },
         onComplete: {
             actions: [
@@ -158,7 +141,7 @@ module.exports = {
                             caseReference: '||/answers/system/case-reference||'
                         },
                         reference: null
-                    }
+                    },
                 },
                 {
                     description: 'Review confirmation email',
@@ -173,10 +156,10 @@ module.exports = {
                             caseReference: '||/answers/system/case-reference||'
                         },
                         reference: null
-                    }
-                }
-            ]
-        }
+                    },
+                },
+            ],
+        },
     },
-    attributes: {}
+    attributes: {},
 };
