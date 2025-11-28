@@ -25,7 +25,7 @@ module.exports = {
         'p--why-do-you-want-a-review': whyDoYouWantReview.section,
         system: system.section,
         owner: owner.section,
-        origin: origin.section
+        origin: origin.section,
     },
     routes: {
         initial: 'p--decision-letter',
@@ -42,8 +42,8 @@ module.exports = {
             'p--why-do-you-want-a-review': whyDoYouWantReview.route,
             system: system.route,
             owner: owner.route,
-            origin: origin.route
-        }
+            origin: origin.route,
+        },
     },
     answers: {},
     onSubmit: {
@@ -57,8 +57,8 @@ module.exports = {
                 retries: 0,
                 data: {
                     questionnaireDef: '$.questionnaireDef',
-                    logger: '$.logger'
-                }
+                    logger: '$.logger',
+                },
             },
             {
                 id: 'task2',
@@ -66,8 +66,8 @@ module.exports = {
                 retries: 0,
                 data: {
                     questionnaire: '$.questionnaireDef',
-                    logger: '$.logger'
-                }
+                    logger: '$.logger',
+                },
             },
             {
                 id: 'task3',
@@ -75,10 +75,10 @@ module.exports = {
                 retries: 0,
                 data: {
                     questionnaire: '$.questionnaireDef',
-                    logger: '$.logger'
-                }
-            }
-        ]
+                    logger: '$.logger',
+                },
+            },
+        ],
     },
     onCreate: {
         id: 'task0',
@@ -92,20 +92,20 @@ module.exports = {
                 data: {
                     questionnaire: '$.questionnaireDef',
                     logger: '$.logger',
-                    type: '$.type'
-                }
-            }
-        ]
+                    type: '$.type',
+                },
+            },
+        ],
     },
     progress: ['p--decision-letter'],
     taxonomies: {
         theme: {
             taxa: {
                 'request-a-review': {
-                    title: 'Request a review'
-                }
-            }
-        }
+                    title: 'Request a review',
+                },
+            },
+        },
     },
     meta: {
         questionnaireDocumentVersion: '5.0.0',
@@ -121,10 +121,11 @@ module.exports = {
                         emailAddress:
                             '||/meta/personalisation/email-address||',
                         personalisation: {
-                            caseReference: '||/answers/system/case-reference||'
+                            caseReference: '||/answers/system/case-reference||',
+                            content: 'https://claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/secure-link-login?uid=||/answers/owner/owner-id||&qid='
                         },
                         reference: null
-                    }
+                    },
                 },
                 {
                     description: 'Decision notification sms',
@@ -136,12 +137,14 @@ module.exports = {
                         emailAddress:
                             '||/meta/personalisation/telephone-number||',
                         personalisation: {
-                            caseReference: '||/answers/system/case-reference||'
+                            caseReference: '||/answers/system/case-reference||',    
+                            content: 'https://claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/secure-link-login?uid=||/answers/owner/owner-id||&qid='
+
                         },
                         reference: null
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         },
         onComplete: {
             actions: [
@@ -158,7 +161,7 @@ module.exports = {
                             caseReference: '||/answers/system/case-reference||'
                         },
                         reference: null
-                    }
+                    },
                 },
                 {
                     description: 'Review confirmation email',
@@ -173,10 +176,10 @@ module.exports = {
                             caseReference: '||/answers/system/case-reference||'
                         },
                         reference: null
-                    }
-                }
-            ]
-        }
+                    },
+                },
+            ],
+        },
     },
-    attributes: {}
+    attributes: {},
 };
