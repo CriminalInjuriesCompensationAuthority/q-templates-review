@@ -9,7 +9,7 @@ const {
     BeforeAll,
     AfterAll,
     setDefaultTimeout,
-    defineParameterType
+    defineParameterType,
 } = require('@cucumber/cucumber');
 const templates = require('../utils/templates');
 const answerFormatter = require('../utils/answerFormatter');
@@ -20,7 +20,7 @@ const cwSteps = require('./cwStepFunctions');
 const {
     writeQuestionnaireToFile,
     compareFixtures,
-    deleteFixtures
+    deleteFixtures,
 } = require('../utils/fixtureComparer');
 
 const secrets = require('../../../env/default/test.secrets');
@@ -48,7 +48,7 @@ defineParameterType({name: 'postcode', regexp: stringRegex, transformer: stringT
 defineParameterType({name: 'task', regexp: stringRegex, transformer: stringTransformer});
 defineParameterType({name: 'status', regexp: stringRegex, transformer: stringTransformer});
 
-BeforeAll(async function() {
+BeforeAll(async function () {
     target = this.parameters.target;
     console.log(`Running against ${target}...`);
     if (target === 'router') {
@@ -61,7 +61,7 @@ BeforeAll(async function() {
             fullFixtureComparison: this.parameters.fullFixtureComparison,
             stateTracker: createStateTracker(
                 templates['sexual-assault']('4187989b-4af8-415e-9715-3912f9c8918c')
-            )
+            ),
         };
         deleteFixtures();
     } else if (target === 'dcs') {
@@ -74,7 +74,7 @@ BeforeAll(async function() {
             ownerId: 'urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6',
             externalId: 'urn:uuid:f81d4fae-7dec-11d0-a765-123456781234',
             isAuthenticated: false,
-            origin: 'web'
+            origin: 'web',
         };
     } else if (target === 'cw') {
         testObject = {
@@ -86,7 +86,7 @@ BeforeAll(async function() {
             entryPoint: this.parameters.entryPoint,
             templateSections: templates['sexual-assault']('test-id').sections,
             secrets: secrets(this.parameters.environment),
-            templateVersion: this.parameters.templateVersion
+            templateVersion: this.parameters.templateVersion,
         };
         console.log(`Running in headless mode: ${this.parameters.headless}`);
         await cwSteps.before(testObject);
@@ -131,16 +131,16 @@ AfterAll(() => {
     }
 });
 
-Before(async function(testCase) {
+Before(async function (testCase) {
     // Make scenario tags available through this.tags
-    this.tags = testCase.pickle.tags.map(tag => tag.name);
+    this.tags = testCase.pickle.tags.map((tag) => tag.name);
 
     if (target === 'router') {
         routerSteps.before(testObject);
     }
 });
 
-After(async function(testCase) {
+After(async function (testCase) {
     if (target === 'cw') {
         if (testCase.result.status === 'FAILED') {
             const pageName = testCase.pickle.name.split(' ').at(-1);
@@ -149,11 +149,11 @@ After(async function(testCase) {
     }
 });
 
-Given('the user authenticates with OIDC', async function() {
+Given('the user authenticates with OIDC', async function () {
     await cwSteps.authenticateToOIDCProvider(testObject);
 });
 
-Given('the user creates an application for compensation', async function() {
+Given('the user creates an application for compensation', async function () {
     if (target === 'router') {
         routerSteps.createsApplication(testObject);
     } else if (target === 'dcs') {
@@ -163,7 +163,7 @@ Given('the user creates an application for compensation', async function() {
     }
 });
 
-Given('the user is on page {page}', async function(pageId) {
+Given('the user is on page {page}', async function (pageId) {
     if (target === 'router') {
         routerSteps.isOnPage(testObject, pageId);
     } else if (target === 'dcs') {
@@ -173,7 +173,7 @@ Given('the user is on page {page}', async function(pageId) {
     }
 });
 
-When('the user answers {answer} to the question {question}', async function(answer, questionId) {
+When('the user answers {answer} to the question {question}', async function (answer, questionId) {
     if (target === 'router') {
         routerSteps.answersQuestion(testObject, answerFormatter(answer), questionId);
     } else if (target === 'dcs') {
@@ -183,54 +183,54 @@ When('the user answers {answer} to the question {question}', async function(answ
     }
 });
 
-When('the user answers {answer} \\({context}\\) to the question {question}', async function(
-    answer,
-    context,
-    questionId
-) {
-    if (target === 'router') {
-        routerSteps.answersQuestion(testObject, answerFormatter(answer), questionId);
-    } else if (target === 'dcs') {
-        await dcsSteps.answersQuestion(testObject, answerFormatter(answer), questionId);
-    } else if (target === 'cw') {
-        await cwSteps.answersQuestion(testObject, answerFormatter(answer), questionId);
+When(
+    'the user answers {answer} \\({context}\\) to the question {question}',
+    async function (answer, context, questionId) {
+        if (target === 'router') {
+            routerSteps.answersQuestion(testObject, answerFormatter(answer), questionId);
+        } else if (target === 'dcs') {
+            await dcsSteps.answersQuestion(testObject, answerFormatter(answer), questionId);
+        } else if (target === 'cw') {
+            await cwSteps.answersQuestion(testObject, answerFormatter(answer), questionId);
+        }
     }
-});
+);
 
-When('the user inputs their telephone number to the question {question}', async function(
-    questionId
-) {
+When(
+    'the user inputs their telephone number to the question {question}',
+    async function (questionId) {
+        if (target === 'router') {
+            routerSteps.answersQuestion(
+                testObject,
+                answerFormatter(testObject.telephoneNumber),
+                questionId
+            );
+        } else if (target === 'dcs') {
+            await dcsSteps.answersQuestion(
+                testObject,
+                answerFormatter(testObject.telephoneNumber),
+                questionId
+            );
+        } else if (target === 'cw') {
+            await cwSteps.answersQuestion(
+                testObject,
+                answerFormatter(testObject.telephoneNumber),
+                questionId
+            );
+        }
+    }
+);
+
+When('the user inputs their email address to the question {question}', async function (questionId) {
     if (target === 'router') {
         routerSteps.answersQuestion(
             testObject,
-            answerFormatter(testObject.telephoneNumber),
+            answerFormatter(testObject.emailAddress),
             questionId
         );
     } else if (target === 'dcs') {
         await dcsSteps.answersQuestion(
             testObject,
-            answerFormatter(testObject.telephoneNumber),
-            questionId
-        );
-    } else if (target === 'cw') {
-        await cwSteps.answersQuestion(
-            testObject,
-            answerFormatter(testObject.telephoneNumber),
-            questionId
-        );
-    }
-});
-
-When('the user inputs their email address to the question {question}', async function(questionId) {
-    if (target === 'router') {
-        routerSteps.answersQuestion(
-            testObject,
-            answerFormatter(testObject.emailAddress),
-            questionId
-        );
-    } else if (target === 'dcs') {
-        await dcsSteps.answersQuestion(
-            testObject,
             answerFormatter(testObject.emailAddress),
             questionId
         );
@@ -243,28 +243,28 @@ When('the user inputs their email address to the question {question}', async fun
     }
 });
 
-When('the user enters {postcode} into the postcode lookup', async function(postcode) {
+When('the user enters {postcode} into the postcode lookup', async function (postcode) {
     if (target === 'cw') {
         await cwSteps.enterPostcodeLookup(testObject, postcode);
     } else {
         throw new Error('Postcode lookup can only be used when running against cica web');
     }
 });
-When('the user selects find address', async function() {
+When('the user selects find address', async function () {
     if (target === 'cw') {
         await cwSteps.findAddress(testObject);
     } else {
         throw new Error('Postcode lookup can only be used when running against cica web');
     }
 });
-When('the user selects {answer} from the found addresses', async function(address) {
+When('the user selects {answer} from the found addresses', async function (address) {
     if (target === 'cw') {
         await cwSteps.selectAddress(testObject, address);
     } else {
         throw new Error('Postcode lookup can only be used when running against cica web');
     }
 });
-When('the user continues', async function() {
+When('the user continues', async function () {
     if (target === 'router') {
         routerSteps.continues(testObject);
     } else if (target === 'dcs') {
@@ -274,7 +274,7 @@ When('the user continues', async function() {
     }
 });
 
-When('the user advances the application', async function() {
+When('the user advances the application', async function () {
     if (target === 'router') {
         routerSteps.advances(testObject);
     } else if (target === 'dcs') {
@@ -284,7 +284,7 @@ When('the user advances the application', async function() {
     }
 });
 
-When('the user selects previous page', async function() {
+When('the user selects previous page', async function () {
     if (target === 'router') {
         routerSteps.selectsPreviousPage(testObject);
     } else if (target === 'dcs') {
@@ -294,7 +294,7 @@ When('the user selects previous page', async function() {
     }
 });
 
-When('the user selects "Agree and submit"', async function() {
+When('the user selects "Agree and submit"', async function () {
     if (target === 'router') {
         return 'ok';
     } else if (target === 'dcs') {
@@ -304,7 +304,7 @@ When('the user selects "Agree and submit"', async function() {
     }
 });
 
-When('the user has completed the application', async function() {
+When('the user has completed the application', async function () {
     if (target === 'router') {
         return 'ok';
     } else if (target === 'dcs') {
@@ -314,7 +314,7 @@ When('the user has completed the application', async function() {
     }
 });
 
-Then('the {task} task status will be marked as {status}', async function(task, status) {
+Then('the {task} task status will be marked as {status}', async function (task, status) {
     if (task === 't-check-your-answers') {
         console.log('Skipping confirmation task completion check');
         return;
@@ -328,7 +328,7 @@ Then('the {task} task status will be marked as {status}', async function(task, s
     }
 });
 
-When('the user selects the task {task}', async function(task) {
+When('the user selects the task {task}', async function (task) {
     if (target === 'router') {
         await routerSteps.selectTask(testObject, task);
     } else if (target === 'dcs') {
@@ -338,7 +338,7 @@ When('the user selects the task {task}', async function(task) {
     }
 });
 
-When('the user accepts all cookies', async function() {
+When('the user accepts all cookies', async function () {
     if (target === 'cw') {
         await cwSteps.acceptCookies(testObject);
     } else {
@@ -346,7 +346,7 @@ When('the user accepts all cookies', async function() {
     }
 });
 
-When('the user navigates to page {page}', async function(page) {
+When('the user navigates to page {page}', async function (page) {
     if (target === 'cw') {
         await cwSteps.navigateToPage(testObject, page);
     } else {
@@ -354,7 +354,7 @@ When('the user navigates to page {page}', async function(page) {
     }
 });
 
-When('the user selects sign in', async function() {
+When('the user selects sign in', async function () {
     if (target === 'cw') {
         await cwSteps.signIn(testObject);
     } else {
@@ -362,7 +362,7 @@ When('the user selects sign in', async function() {
     }
 });
 
-When('the user enters their one-login email', async function() {
+When('the user enters their one-login email', async function () {
     if (target === 'cw') {
         await cwSteps.enterOneLoginEmail(testObject);
     } else {
@@ -370,7 +370,7 @@ When('the user enters their one-login email', async function() {
     }
 });
 
-When('the user enters their one-login password', async function() {
+When('the user enters their one-login password', async function () {
     if (target === 'cw') {
         await cwSteps.enterOneLoginPassword(testObject);
     } else {
@@ -378,7 +378,7 @@ When('the user enters their one-login password', async function() {
     }
 });
 
-When('the user enters their security code', async function() {
+When('the user enters their security code', async function () {
     if (target === 'cw') {
         await cwSteps.enterSecurityCode(testObject);
     } else {
@@ -386,7 +386,7 @@ When('the user enters their security code', async function() {
     }
 });
 
-Given('the user is on optional page {page}', async function(page) {
+Given('the user is on optional page {page}', async function (page) {
     if (target === 'cw') {
         await cwSteps.isOnOptionalPage(testObject, page);
     } else {
@@ -394,7 +394,7 @@ Given('the user is on optional page {page}', async function(page) {
     }
 });
 
-When('the user continues from the optional page {page}', async function(page) {
+When('the user continues from the optional page {page}', async function (page) {
     if (target === 'cw') {
         await cwSteps.continueFromOptionalPage(testObject, page);
     } else {
@@ -402,7 +402,7 @@ When('the user continues from the optional page {page}', async function(page) {
     }
 });
 
-When('the answer {answer} is unchecked', async function(answer) {
+When('the answer {answer} is unchecked', async function (answer) {
     if (target === 'cw') {
         await cwSteps.answerIsUnchecked(testObject, answer);
     } else {
@@ -410,7 +410,7 @@ When('the answer {answer} is unchecked', async function(answer) {
     }
 });
 
-When('the user accepts analytics cookies', async function() {
+When('the user accepts analytics cookies', async function () {
     if (target === 'cw') {
         await cwSteps.acceptAnalyticsCookies(testObject);
     } else {
@@ -418,7 +418,7 @@ When('the user accepts analytics cookies', async function() {
     }
 });
 
-When('the user clicks the sign in link', async function() {
+When('the user clicks the sign in link', async function () {
     if (target === 'cw') {
         await cwSteps.clickSigninLink(testObject);
     } else {
@@ -426,10 +426,18 @@ When('the user clicks the sign in link', async function() {
     }
 });
 
-When('the user clicks the browser back button', async function() {
+When('the user clicks the browser back button', async function () {
     if (target === 'cw') {
         await cwSteps.clickBackButton(testObject);
     } else {
         throw new Error('Browser back button can only be used when running against cica web');
+    }
+});
+
+When('the user logs in to one login', async function () {
+    if (target === 'cw') {
+        await cwSteps.logInToOneLogin(testObject);
+    } else {
+        throw new Error('One login is only available when running against CW');
     }
 });

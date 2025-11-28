@@ -13,14 +13,25 @@ function removeSectionIdPrefix(sectionId) {
     return sectionId.replace(/^p-/, '');
 }
 
+async function logInToOneLogin(testObject) {
+    await authenticateToOIDCProvider(testObject);
+    await acceptAnalyticsCookies(testObject);
+    await signIn(testObject);
+    await enterOneLoginEmail(testObject);
+    await continues(testObject);
+    await enterOneLoginPassword(testObject);
+    await continues(testObject);
+    await enterSecurityCode(testObject);
+    await continues(testObject);
+    if (isOnOptionalPage(testObject, 'updated-terms-and-conditions')) {
+        await continueFromOptionalPage(testObject, 'updated-terms-and-conditions');
+    }
+}
+
 async function authenticateToOIDCProvider(testObject) {
     testObject.authenticationPage = await testObject.context.newPage();
     if (testObject.environment !== 'prod') {
-        try {
-            await testObject.authenticationPage.goto(testObject.secrets.ONE_LOGIN_BASIC_AUTH_URL);
-        } catch (err) {
-            // console.log({err});
-        }
+        await testObject.authenticationPage.goto(testObject.secrets.ONE_LOGIN_BASIC_AUTH_URL);
     } else {
         console.log(`Ignoring basic authentication to OIDC provider for "${environment}"`);
     }
@@ -32,10 +43,7 @@ async function logOutOfOneLogin(testObject) {
 }
 
 async function signIn(testObject) {
-    await testObject.page
-        .getByRole('button')
-        .filter({hasText: 'Sign in'})
-        .click({timeout: 3000});
+    await testObject.page.getByRole('button').filter({hasText: 'Sign in'}).click({timeout: 3000});
 }
 
 async function enterOneLoginEmail(testObject) {
@@ -81,17 +89,11 @@ async function answerIsUnchecked(testObject, answer) {
 }
 
 async function acceptCookies(testObject) {
-    await testObject.page
-        .getByRole('button')
-        .filter({hasText: 'Accept all cookies'})
-        .click();
+    await testObject.page.getByRole('button').filter({hasText: 'Accept all cookies'}).click();
 }
 
 async function acceptAnalyticsCookies(testObject) {
-    await testObject.page
-        .getByRole('button')
-        .filter({hasText: 'Accept analytics cookies'})
-        .click();
+    await testObject.page.getByRole('button').filter({hasText: 'Accept analytics cookies'}).click();
 }
 
 async function openDetailsComponent(page) {
@@ -134,15 +136,12 @@ async function createsApplication(testObject) {
                 name: 'featureFlags',
                 value: `{"templateName": "sexual-assault", "templateVersion": "${testObject.templateVersion}", "bearerAuth": "${testObject.secrets.FEATURE_FLAGS_TOKEN}"}`,
                 domain,
-                path: '/'
-            }
+                path: '/',
+            },
         ]);
     }
     await testObject.page.getByLabel(`Start a new application`).check();
-    await testObject.page
-        .getByRole('button')
-        .filter({hasText: 'continue'})
-        .click();
+    await testObject.page.getByRole('button').filter({hasText: 'continue'}).click();
 }
 
 async function isOnPage(testObject, pageId) {
@@ -167,7 +166,7 @@ async function answersQuestion(testObject, answer, questionId) {
         // Police force question
         const policeForceName = testObject.templateSections[
             'p--which-police-force-is-investigating-the-crime'
-        ].schema.properties[questionId].oneOf.filter(force => force.const === parseInt(answer))[0]
+        ].schema.properties[questionId].oneOf.filter((force) => force.const === parseInt(answer))[0]
             .title;
         await testObject.page.locator(`#${questionId}`).clear();
         await testObject.page.locator(`#${questionId}`).fill(policeForceName.substring(1));
@@ -206,10 +205,7 @@ async function enterPostcodeLookup(testObject, postcode) {
 }
 async function findAddress(testObject) {
     await testObject.page.waitForTimeout(200);
-    await testObject.page
-        .getByRole('button')
-        .filter({hasText: 'Find address'})
-        .click();
+    await testObject.page.getByRole('button').filter({hasText: 'Find address'}).click();
 }
 async function selectAddress(testObject, address) {
     await testObject.page.waitForTimeout(200);
@@ -219,20 +215,12 @@ async function selectAddress(testObject, address) {
 }
 async function continues(testObject) {
     if (
-        (await testObject.page
-            .getByRole('button')
-            .filter({hasText: 'agree and submit'})
-            .count()) > 0
+        (await testObject.page.getByRole('button').filter({hasText: 'agree and submit'}).count()) >
+        0
     ) {
-        await testObject.page
-            .getByRole('button')
-            .filter({hasText: 'agree and submit'})
-            .click();
+        await testObject.page.getByRole('button').filter({hasText: 'agree and submit'}).click();
     } else {
-        await testObject.page
-            .getByRole('button')
-            .filter({hasText: 'continue'})
-            .click();
+        await testObject.page.getByRole('button').filter({hasText: 'continue'}).click();
     }
 }
 
@@ -297,5 +285,6 @@ module.exports = {
     clickSigninLink,
     checkTaskStatus,
     selectTask,
-    clickBackButton
+    clickBackButton,
+    logInToOneLogin,
 };
