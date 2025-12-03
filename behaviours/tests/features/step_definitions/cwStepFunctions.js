@@ -28,6 +28,10 @@ async function logInToOneLogin(testObject) {
     }
 }
 
+async function selects(testObject, option) {
+    await testObject.page.getByText(option).click({timeout: 3000});
+}
+
 async function authenticateToOIDCProvider(testObject) {
     testObject.authenticationPage = await testObject.context.newPage();
     if (testObject.environment !== 'prod') {
@@ -287,4 +291,5 @@ module.exports = {
     selectTask,
     clickBackButton,
     logInToOneLogin,
+    selects,
 };

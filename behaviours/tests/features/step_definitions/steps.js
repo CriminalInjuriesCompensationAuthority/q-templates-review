@@ -441,3 +441,13 @@ When('the user logs in to one login', async function () {
         throw new Error('One login is only available when running against CW');
     }
 });
+
+When('the user selects {option}', async function () {
+    if (target === 'cw') {
+        await cwSteps.selects(testObject, option);
+    } else {
+        throw new Error(
+            'Selecting an option on the page is only available when running against CW'
+        );
+    }
+});
