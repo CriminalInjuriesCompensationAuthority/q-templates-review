@@ -44,28 +44,29 @@ module.exports = {
                     <p class="govuk-body">If your case is reviewed, a different person will review it. They might make the same decision or a different one.</p>
                     <p class="govuk-body">We cannot say how long a review will take. It depends on the circumstances of your claim.</p>
                     <p class="govuk-body">You can ask for a review yourself. You do not need to pay someone to do this for you. But if you choose to pay a legal representative, we cannot pay their fees.</p>
-                    `
-                }
+                    `,
+                },
             },
             examples: [{}],
             invalidExamples: [
                 {
-                    foo: 'bar'
-                }
+                    foo: 'bar',
+                },
             ],
             options: {
                 buttonText: 'Ask for a review',
-                showSurvey: true
-            }
-        }
+                showSurvey: true,
+                showBackButton: false,
+            },
+        },
     },
     route: {
         on: {
             ANSWER: [
                 {
-                    target: 'p--ask-for-a-review'
-                }
-            ]
-        }
-    }
+                    target: 'p--ask-for-a-review',
+                },
+            ],
+        },
+    },
 };
