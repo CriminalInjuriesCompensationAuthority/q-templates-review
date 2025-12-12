@@ -78,6 +78,53 @@ module.exports = {
         questionnaireDocumentVersion: '5.0.0',
         attributes: {}
     },
-    attributes: {
+    inputSchema: {
+        $id: 'inputSchema:tx45',
+        $schema: 'http://json-schema.org/draft-07/schema#',
+        type: 'object',
+        required: [
+            "caseReferenceNumber",
+            "applicantForename",
+            "applicantSurname",
+            "dateSent",
+            "shortExplanation",
+            "longExplanation",
+            "paragraphs",
+            "requestReviewBy"
+        ],
+        additionalProperties: false,
+        properties: {
+            'caseReferenceNumber': {
+                type: 'string'
+            },
+            'applicantForename': {
+                type: 'string'
+            },
+            'applicantSurname': {
+                type: 'string'
+            },
+            'dateSent': {
+                type: 'string',
+                format: 'date'
+
+            },
+            'shortExplanation': {
+                type: 'string'
+            },
+            'longExplanation': {
+                type: 'string'
+            },
+            'paragraphs': {
+                type: 'array',
+                minItems: 1,
+                items: {
+                    type: 'string'
+                }
+            },
+            'requestReviewBy': {
+                type: 'string',
+                format: 'date'
+            },
+        }
     }
 };
