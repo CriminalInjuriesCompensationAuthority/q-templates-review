@@ -23,7 +23,12 @@ Given the user is on optional page "updated-terms-and-conditions"
 When the user continues from the optional page "updated-terms-and-conditions"
 Then the user is on page "/account/dashboard"
 
-Scenario: the user clicks the view decision link
+Scenario: the user clicks the view application link
 Given the user is on page "/account/dashboard"
-When the user selects "view decision"
+When the user selects "view application"
+Then the user is on page "/account/dashboard/{questionnaire-id}"
+
+Scenario: the user clicks view decision link
+Given the user is on page "/account/dashboard/{questionnaire-id}"
+When the user selects "Read our decision about your applications"
 Then the user is on page "p--decision"
