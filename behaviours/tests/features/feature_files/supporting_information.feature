@@ -3,7 +3,7 @@ Feature: journey for user with supporting information
 
 Scenario: user clicks decision link
 Given the user clicks the sign in link
-Then the user is on page "p-decision"
+Then the user is on page "p--decision"
 
 Scenario: user starts a review within allowed window and is presented with context page
 Given the user is on page "p--decision"
