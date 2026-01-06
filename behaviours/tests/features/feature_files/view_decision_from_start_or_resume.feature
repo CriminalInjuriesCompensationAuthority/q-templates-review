@@ -30,5 +30,5 @@ Then the user is on page "/account/dashboard/{questionnaire-id}"
 
 Scenario: the user clicks view decision link
 Given the user is on page "/account/dashboard/{questionnaire-id}"
-When the user selects "Read our decision about your applications"
+When the user selects "Read our decision about your application"
 Then the user is on page "p--decision"
