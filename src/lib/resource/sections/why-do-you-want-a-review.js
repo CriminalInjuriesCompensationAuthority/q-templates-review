@@ -5,9 +5,9 @@ module.exports = {
         schema: {
             $schema: 'http://json-schema.org/draft-07/schema#',
             type: 'object',
-            required: ['q--why-do-you-want-a-review'],
+            required: ['q-why-do-you-want-a-review'],
             properties: {
-                'q--why-do-you-want-a-review': {
+                'q-why-do-you-want-a-review': {
                     type: 'string',
                     title: 'Tell us why you want a review',
                     description: `<p class="govuk-body">Explain why you do not agree with our decision. Let us know if you:</p>
@@ -35,17 +35,17 @@ module.exports = {
             },
             errorMessage: {
                 required: {
-                    'q--why-do-you-want-a-review': 'Enter your reasons for wanting a review',
+                    'q-why-do-you-want-a-review': 'Enter your reasons for wanting a review',
                 },
             },
             examples: [
                 {
-                    'q--why-do-you-want-a-review': 'Some description',
+                    'q-why-do-you-want-a-review': 'Some description',
                 },
             ],
             invalidExamples: [
                 {
-                    'q--why-do-you-want-a-review': 12345,
+                    'q-why-do-you-want-a-review': 12345,
                 },
             ],
         },
@@ -54,7 +54,7 @@ module.exports = {
         on: {
             ANSWER: [
                 {
-                    target: 'p--do-you-have-supporting-info',
+                    target: 'p-do-you-have-supporting-info',
                 },
             ],
         },

@@ -3,7 +3,7 @@
 const {version} = require('../package.json');
 
 const askForReview = require('./lib/resource/sections/ask-for-a-review');
-const decisionLetter = require('./lib/resource/sections/decision-letter');
+const decisionLetter = require('./lib/resource/sections/decision');
 const doYouHaveSupportingInfo = require('./lib/resource/sections/do-you-have-supporting-info');
 const checkYourAnswers = require('./lib/resource/sections/check-your-answers');
 const reviewConfirmation = require('./lib/resource/sections/review-confirmation');
@@ -12,34 +12,37 @@ const whyDoYouWantReview = require('./lib/resource/sections/why-do-you-want-a-re
 const system = require('./lib/resource/sections/system');
 const owner = require('./lib/resource/sections/owner');
 const origin = require('./lib/resource/sections/origin');
+const deadlineForReview = require('./lib/resource/sections/deadline-for-review');
 module.exports = {
     type: 'request-a-review',
     version,
     sections: {
         'p--ask-for-a-review': askForReview.section,
-        'p--decision-letter': decisionLetter.section,
-        'p--do-you-have-supporting-info': doYouHaveSupportingInfo.section,
+        'p--decision': decisionLetter.section,
+        'p-do-you-have-supporting-info': doYouHaveSupportingInfo.section,
         'p--check-your-answers': checkYourAnswers.section,
         'p--review-confirmation': reviewConfirmation.section,
         'p--sending-supporting-information': sendingSupportingInfo.section,
-        'p--why-do-you-want-a-review': whyDoYouWantReview.section,
+        'p-why-do-you-want-a-review': whyDoYouWantReview.section,
+        'p-deadline-for-review': deadlineForReview.section,
         system: system.section,
         owner: owner.section,
         origin: origin.section,
     },
     routes: {
-        initial: 'p--decision-letter',
+        initial: 'p--decision',
         referrer: 'https://www.gov.uk/claim-compensation-criminal-injury/make-claim',
         summary: ['p--check-your-answers'],
         confirmation: 'p--review-confirmation',
         states: {
             'p--ask-for-a-review': askForReview.route,
-            'p--decision-letter': decisionLetter.route,
-            'p--do-you-have-supporting-info': doYouHaveSupportingInfo.route,
+            'p--decision': decisionLetter.route,
+            'p-do-you-have-supporting-info': doYouHaveSupportingInfo.route,
             'p--check-your-answers': checkYourAnswers.route,
             'p--review-confirmation': reviewConfirmation.route,
             'p--sending-supporting-information': sendingSupportingInfo.route,
-            'p--why-do-you-want-a-review': whyDoYouWantReview.route,
+            'p-why-do-you-want-a-review': whyDoYouWantReview.route,
+            'p-deadline-for-review': deadlineForReview.route,
             system: system.route,
             owner: owner.route,
             origin: origin.route,
@@ -78,6 +81,15 @@ module.exports = {
                     logger: '$.logger',
                 },
             },
+            {
+                id: 'task4',
+                type: 'createStubs',
+                retries: 0,
+                data: {
+                    questionnaire: '$.questionnaireDef',
+                    logger: '$.logger',
+                },
+            },
         ],
     },
     onCreate: {
@@ -97,7 +109,7 @@ module.exports = {
             },
         ],
     },
-    progress: ['p--decision-letter'],
+    progress: ['p--decision'],
     taxonomies: {
         theme: {
             taxa: {
@@ -180,6 +192,60 @@ module.exports = {
                 },
             ],
         },
+        summaryBlocks: {
+            read: {
+                condition: 'unopened',
+                link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a>',
+            },
+            're-read': {
+                condition: 'viewed',
+                link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a>',
+            },
+            //TODO: this may not be needed, depending on how we implement submissions (if we delete this template and create a stub instead we don't need it)
+            'send-supporting-information': {
+                condition: 'submitted',
+                link: '<a href="/apply/resume/||questionnaireId||?target=send-supporting-information" class="govuk-link">Find out how to send supporting information for a review</a>',
+            },
+        },
     },
-    attributes: {},
+    attributes: {
+        q__roles: {
+            expired: {
+                schema: {
+                    $schema: 'http://json-schema.org/draft-07/schema#',
+                    title: 'Someone requesting a review pass the deadline',
+                    type: 'boolean',
+                    // prettier-ignore
+                    const: [
+                        'dateCompare',
+                        '$.answers.system.expiry-date', // this date ...
+                        '>=', // is more than or equal to ...
+                        '-1', // 1 ...
+                        'days', // day (before, due to the negative (-1)) ...
+                        // today's date (no second date given. defaults to today's date).
+                    ],
+                    examples: [{}],
+                    invalidExamples: [{}],
+                },
+            },
+            inTime: {
+                schema: {
+                    $schema: 'http://json-schema.org/draft-07/schema#',
+                    title: 'Someone requesting a review before the deadline',
+                    type: 'boolean',
+                    // prettier-ignore
+                    const: [
+                        'dateCompare',
+                        '$.answers.system.expiry-date', // this date ...
+                        '>=', // is more than or equal to
+                        '0', // 0 ...
+                        'days', // days (after) ...
+                        // today's date (no second date given. defaults to today's date).
+                    ],
+                    examples: [{}],
+                    invalidExamples: [{}],
+                },
+            },
+        },
+    },
 };
