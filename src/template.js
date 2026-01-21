@@ -180,6 +180,21 @@ module.exports = {
                 },
             ],
         },
+        summaryBlocks: {
+            read: {
+                condition: 'unopened',
+                link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a>',
+            },
+            're-read': {
+                condition: 'viewed',
+                link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a>',
+            },
+            //TODO: this may not be needed, depending on how we implement submissions (if we delete this template and create a stub instead we don't need it)
+            'send-supporting-information': {
+                condition: 'submitted',
+                link: '<a href="/apply/resume/||questionnaireId||?target=send-supporting-information" class="govuk-link">Find out how to send supporting information for a review</a>',
+            },
+        },
     },
     attributes: {},
 };
