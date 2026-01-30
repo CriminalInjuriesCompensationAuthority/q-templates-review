@@ -60,7 +60,7 @@ module.exports = {
                     target: 'p--sending-supporting-information',
                     cond: [
                         '==',
-                        '$.answers.p--do-you-have-supporting-info.q--supporting-info',
+                        '$.answers.p-do-you-have-supporting-info.q--supporting-info',
                         true,
                     ],
                 },

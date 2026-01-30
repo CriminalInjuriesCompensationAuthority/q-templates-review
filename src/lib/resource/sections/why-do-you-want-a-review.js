@@ -54,7 +54,7 @@ module.exports = {
         on: {
             ANSWER: [
                 {
-                    target: 'p--do-you-have-supporting-info',
+                    target: 'p-do-you-have-supporting-info',
                 },
             ],
         },

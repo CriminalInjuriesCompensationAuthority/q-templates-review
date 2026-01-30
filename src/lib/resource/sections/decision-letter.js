@@ -25,7 +25,7 @@ module.exports = {
                         <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Save the decision</h2>
                         <p class="govuk-body">To keep a copy of the decision, download or print it.</p>
                         <p class="govuk-body"><a class="govuk-link govuk-!-margin-left-3" href="pdf-URL" target="_blank">Download as PDF ()</a></p>     
-                        <p class="govuk-body"><a class="govuk-link govuk-!-margin-left-3" href="/download/p--decision-letter" target="_blank">Download as an accessible web page (HTML, )</a></p>                     
+                        <p class="govuk-body"><a class="govuk-link govuk-!-margin-left-3" href="/download/p--decision" target="_blank">Download as an accessible web page (HTML, )</a></p>                     
                         <p class="govuk-body"><a class="govuk-link govuk-!-margin-left-3" href="javascript:if(window.print)window.print()">Print your decision</a></p>                       
                     </section>
                     </article>

@@ -30,7 +30,7 @@ module.exports = {
         on: {
             ANSWER: [
                 {
-                    target: 'p--why-do-you-want-a-review',
+                    target: 'p-why-do-you-want-a-review',
                 },
             ],
         },
