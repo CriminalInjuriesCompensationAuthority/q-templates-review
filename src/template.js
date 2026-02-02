@@ -3,7 +3,7 @@
 const {version} = require('../package.json');
 
 const askForReview = require('./lib/resource/sections/ask-for-a-review');
-const decisionLetter = require('./lib/resource/sections/decision-letter');
+const decisionLetter = require('./lib/resource/sections/decision');
 const doYouHaveSupportingInfo = require('./lib/resource/sections/do-you-have-supporting-info');
 const checkYourAnswers = require('./lib/resource/sections/check-your-answers');
 const reviewConfirmation = require('./lib/resource/sections/review-confirmation');
