@@ -12,6 +12,7 @@ const whyDoYouWantReview = require('./lib/resource/sections/why-do-you-want-a-re
 const system = require('./lib/resource/sections/system');
 const owner = require('./lib/resource/sections/owner');
 const origin = require('./lib/resource/sections/origin');
+const deadlineForReview = require('./lib/resource/sections/deadline-for-review');
 module.exports = {
     type: 'request-a-review',
     version,
@@ -23,6 +24,7 @@ module.exports = {
         'p--review-confirmation': reviewConfirmation.section,
         'p--sending-supporting-information': sendingSupportingInfo.section,
         'p-why-do-you-want-a-review': whyDoYouWantReview.section,
+        'p-deadline-for-review': deadlineForReview.section,
         system: system.section,
         owner: owner.section,
         origin: origin.section,
@@ -40,6 +42,7 @@ module.exports = {
             'p--review-confirmation': reviewConfirmation.route,
             'p--sending-supporting-information': sendingSupportingInfo.route,
             'p-why-do-you-want-a-review': whyDoYouWantReview.route,
+            'p-deadline-for-review': deadlineForReview.route,
             system: system.route,
             owner: owner.route,
             origin: origin.route,
@@ -72,6 +75,15 @@ module.exports = {
             {
                 id: 'task3',
                 type: 'sendNotifyMessageToSQS',
+                retries: 0,
+                data: {
+                    questionnaire: '$.questionnaireDef',
+                    logger: '$.logger',
+                },
+            },
+            {
+                id: 'task4',
+                type: 'createStubs',
                 retries: 0,
                 data: {
                     questionnaire: '$.questionnaireDef',
@@ -196,5 +208,44 @@ module.exports = {
             },
         },
     },
-    attributes: {},
+    attributes: {
+        q__roles: {
+            expired: {
+                schema: {
+                    $schema: 'http://json-schema.org/draft-07/schema#',
+                    title: 'Someone requesting a review pass the deadline',
+                    type: 'boolean',
+                    // prettier-ignore
+                    const: [
+                        'dateCompare',
+                        '$.answers.system.expiry-date', // this date ...
+                        '>=', // is more than or equal to ...
+                        '-1', // 1 ...
+                        'days', // day (before, due to the negative (-1)) ...
+                        // today's date (no second date given. defaults to today's date).
+                    ],
+                    examples: [{}],
+                    invalidExamples: [{}],
+                },
+            },
+            inTime: {
+                schema: {
+                    $schema: 'http://json-schema.org/draft-07/schema#',
+                    title: 'Someone requesting a review before the deadline',
+                    type: 'boolean',
+                    // prettier-ignore
+                    const: [
+                        'dateCompare',
+                        '$.answers.system.expiry-date', // this date ...
+                        '>=', // is more than or equal to
+                        '0', // 0 ...
+                        'days', // days (after) ...
+                        // today's date (no second date given. defaults to today's date).
+                    ],
+                    examples: [{}],
+                    invalidExamples: [{}],
+                },
+            },
+        },
+    },
 };
