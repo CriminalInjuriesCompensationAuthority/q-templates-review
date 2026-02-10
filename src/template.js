@@ -190,21 +190,38 @@ module.exports = {
                         reference: null
                     },
                 },
+                {
+                    description: 'Create a stub template for the decision',
+                    type: 'createStub',
+                    sectionIds: ['p--decision', 'system', 'owner', 'origin'],
+                    summaryBlocks: {
+                        read: {
+                            condition: 'always-visible',
+                            link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--blue" style="margin-left:auto">VIEWED</strong>',
+                        },
+                    },
+                },
+                {
+                    description: 'Create a stub template for sending supporting information',
+                    type: 'createStub',
+                    sectionIds: ['p--sending-supporting-information', 'system', 'owner', 'origin'],
+                    summaryBlocks: {
+                        read: {
+                            condition: 'always-visible',
+                            link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Find out how to send supporting information for a review</a>',
+                        },
+                    },
+                },
             ],
         },
         summaryBlocks: {
             read: {
                 condition: 'unopened',
-                link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a>',
+                link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--orange" style="margin-left:auto">TO DO</strong>',
             },
             're-read': {
                 condition: 'viewed',
-                link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a>',
-            },
-            //TODO: this may not be needed, depending on how we implement submissions (if we delete this template and create a stub instead we don't need it)
-            'send-supporting-information': {
-                condition: 'submitted',
-                link: '<a href="/apply/resume/||questionnaireId||?target=send-supporting-information" class="govuk-link">Find out how to send supporting information for a review</a>',
+                link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--blue" style="margin-left:auto">VIEWED</strong>',
             },
         },
     },
