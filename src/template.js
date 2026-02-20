@@ -269,6 +269,7 @@ module.exports = {
         $id: 'inputSchema:tx45',
         $schema: 'http://json-schema.org/draft-07/schema#',
         type: 'object',
+        additionalProperties: false,
         required: [
             "caseReferenceNumber",
             "applicantForename",
@@ -276,42 +277,52 @@ module.exports = {
             "dateSent",
             "shortExplanation",
             "longExplanation",
-            "paragraphs",
+            "paragraph1",
             "requestReviewBy"
         ],
-        additionalProperties: false,
         properties: {
-            'caseReferenceNumber': {
+            caseReferenceNumber: {
                 type: 'string'
             },
-            'applicantForename': {
+            applicantForename: {
                 type: 'string'
             },
-            'applicantSurname': {
+            applicantSurname: {
                 type: 'string'
             },
-            'dateSent': {
-                type: 'string',
-                format: 'date'
-
-            },
-            'shortExplanation': {
-                type: 'string'
-            },
-            'longExplanation': {
-                type: 'string'
-            },
-            'paragraphs': {
-                type: 'array',
-                minItems: 1,
-                items: {
-                    type: 'string'
-                }
-            },
-            'requestReviewBy': {
+            dateSent: {
                 type: 'string',
                 format: 'date'
             },
-        }
+            shortExplanation: {
+                type: 'string'
+            },
+            longExplanation: {
+                type: 'string'
+            },
+            paragraph1: {
+                type: 'string'
+            },
+            paragraph2: {
+                type: 'string'
+            },
+            paragraph3: {
+                type: 'string'
+            },
+            requestReviewBy: {
+                type: 'string',
+                format: 'date'
+            }
+        },
+        allOf: [
+            {
+                if: { required: ["paragraph2"] },
+                then: { required: ["paragraph1"] }
+            },
+            {
+                if: { required: ["paragraph3"] },
+                then: { required: ["paragraph2"] }
+            }
+        ]
     }
 };
