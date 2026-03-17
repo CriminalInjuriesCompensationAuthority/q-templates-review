@@ -10,16 +10,18 @@ module.exports = {
                 'context-decison-letter': {
                     title: 'Decision about your application for compensation',
                     description: `
-                    <p class="govuk-body govuk-!-margin-bottom-0">||/meta/personalisation/first-name|| ||/meta/personalisation/last-name||</p>
-                    <p class="govuk-body govuk-!-margin-bottom-0">Reference number: ||/answers/system/case-reference||</p>
-                    <p class="govuk-body">||/meta/personalisation/date||</p>
+                    <p class="govuk-body govuk-!-margin-bottom-0">{{{ applicantForename }}} {{{ applicantSurname }}}</p>
+                    <p class="govuk-body govuk-!-margin-bottom-0">Reference number: {{{ caseReferenceNumber }}}</p>
+                    <p class="govuk-body">{{{ dateSent }}}</p>
                     <p class="govuk-body">Thank you for your application for criminal injuries compensation. <b>Unfortunately, you are not eligible for compensation.</b></p>
-                    <p class="govuk-body">||/meta/personalisation/short-reason||</p>
+                    <p class="govuk-body">{{{ shortExplanation }}}</p>
                     <p class="govuk-body">This will be disappointing news and not the decision you were hoping for. The decision is not intended to minimise the impact this incident will have had on you.</p>
                     <h2 class="govuk-heading-m">How we made this decision</h2>
-                    <p class="govuk-body">||/meta/personalisation/decision-reason||</p>
+                    <p class="govuk-body">{{{ longExplanation }}}</p>
                     <h3 class="govuk-heading-s">Scheme paragraphs which have affected your eligibility to receive an award</h3>
-                    <p class="govuk-body">||/meta/personalisation/decision-paragraphs||</p>
+                    <p class="govuk-body">{{{ paragraph1 }}}</p>
+                    <p class="govuk-body">{{{ paragraph2 }}}</p>
+                    <p class="govuk-body">{{{ paragraph3 }}}</p>
                     <article class="moj-ticket-panel" aria-label="Sub navigation 1">
                     <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" aria-label="Section 1">
                         <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Save the decision</h2>
@@ -40,7 +42,7 @@ module.exports = {
                     <li>have any extra information you'd like to give us</li>
                     <li>think our decision was wrong for another reason</li>
                     </ul>
-                    <p class="govuk-body"><b>If you want to request a review, do this by 11:59pm on ||/meta/personalisation/expiry-date||.</b> We may be able to extend this date if there are exceptional circumstances.</p>
+                    <p class="govuk-body"><b>If you want to request a review, do this by 11:59pm on {{{ requestReviewBy }}}.</b> We may be able to extend this date if there are exceptional circumstances.</p>
                     <p class="govuk-body">If your case is reviewed, a different person will review it. They might make the same decision or a different one.</p>
                     <p class="govuk-body">We cannot say how long a review will take. It depends on the circumstances of your claim.</p>
                     <p class="govuk-body">You can ask for a review yourself. You do not need to pay someone to do this for you. But if you choose to pay a legal representative, we cannot pay their fees.</p>

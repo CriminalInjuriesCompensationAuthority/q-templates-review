@@ -14,6 +14,15 @@ module.exports = {
                     errorMessage: {
                         pattern: 'Invalid case reference'
                     }
+                },
+                'letter-id': {
+                    type: 'string'
+                },
+                'letter-type': {
+                    type: 'string'
+                },
+                'expiry-date': {
+                    type: 'string'
                 }
             },
             errorMessage: {

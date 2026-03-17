@@ -83,12 +83,12 @@ module.exports = {
                 {
                     description: 'Decision notification email',
                     type: 'sendEmail',
-                    cond: ['==', '$.meta.personalisation.contact-method', 'email'],
+                    cond: ['==', '$.answers.owner.contact-preference', 'E'],
                     // prettier-ignore
                     data: {
                         templateId: '',
                         emailAddress:
-                            '||/meta/personalisation/email-address||',
+                            '||/answers/owner/email||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',
                             content: 'https://claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/secure-link-login?uid=||/answers/owner/owner-id||&qid='
@@ -99,12 +99,12 @@ module.exports = {
                 {
                     description: 'Decision notification sms',
                     type: 'sendSms',
-                    cond: ['==', '$.meta.personalisation.contact-method', 'sms'],
+                    cond: ['==', '$.answers.owner.contact-preference', 'T'],
                     // prettier-ignore
                     data: {
                         templateId: '',
                         emailAddress:
-                            '||/meta/personalisation/telephone-number||',
+                            '||/answers/owner/phone||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',    
                             content: 'https://claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/secure-link-login?uid=||/answers/owner/owner-id||&qid='
@@ -120,12 +120,12 @@ module.exports = {
                 {
                     description: 'Review confirmation email',
                     type: 'sendEmail',
-                    cond: ['==', '$.meta.personalisation.contact-method', 'email'],
+                    cond: ['==', '$.answers.owner.contact-preference', 'E'],
                     // prettier-ignore
                     data: {
                         templateId: '',
                         emailAddress:
-                            '||/meta/personalisation/email-address||',
+                            '||/answers/owner/email||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||'
                         },
@@ -135,12 +135,12 @@ module.exports = {
                 {
                     description: 'Review confirmation email',
                     type: 'sendEmail',
-                    cond: ['==', '$.meta.personalisation.contact-method', 'sms'],
+                    cond: ['==', '$.answers.owner.contact-preference', 'T'],
                     // prettier-ignore
                     data: {
                         templateId: '',
                         emailAddress:
-                            '||/meta/personalisation/telephone-number||',
+                            '||/answers/owner/phone||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||'
                         },
@@ -154,7 +154,7 @@ module.exports = {
                     summaryBlocks: {
                         read: {
                             condition: 'always-visible',
-                            link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--blue" style="margin-left:auto">VIEWED</strong>',
+                            link: '<a href="/apply/resume/||/id||" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--blue" style="margin-left:auto">VIEWED</strong>',
                         },
                     },
                 },
@@ -165,7 +165,7 @@ module.exports = {
                     summaryBlocks: {
                         read: {
                             condition: 'always-visible',
-                            link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Find out how to send supporting information for a review</a>',
+                            link: '<a href="/apply/resume/||/id||" class="govuk-link">Find out how to send supporting information for a review</a>',
                         },
                     },
                 },
@@ -174,11 +174,11 @@ module.exports = {
         summaryBlocks: {
             read: {
                 condition: 'unopened',
-                link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--orange" style="margin-left:auto">TO DO</strong>',
+                link: '<a href="/apply/resume/||/id||" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--orange" style="margin-left:auto">TO DO</strong>',
             },
             're-read': {
                 condition: 'viewed',
-                link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--blue" style="margin-left:auto">VIEWED</strong>',
+                link: '<a href="/apply/resume/||/id||" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--blue" style="margin-left:auto">VIEWED</strong>',
             },
         },
     },
@@ -222,4 +222,64 @@ module.exports = {
             },
         },
     },
+    inputSchema: {
+        $id: 'inputSchema:tx45',
+        $schema: 'http://json-schema.org/draft-07/schema#',
+        type: 'object',
+        additionalProperties: false,
+        required: [
+            "caseReferenceNumber",
+            "applicantForename",
+            "applicantSurname",
+            "dateSent",
+            "shortExplanation",
+            "longExplanation",
+            "paragraph1",
+            "requestReviewBy"
+        ],
+        properties: {
+            caseReferenceNumber: {
+                type: 'string'
+            },
+            applicantForename: {
+                type: 'string'
+            },
+            applicantSurname: {
+                type: 'string'
+            },
+            dateSent: {
+                type: 'string',
+                format: 'date'
+            },
+            shortExplanation: {
+                type: 'string'
+            },
+            longExplanation: {
+                type: 'string'
+            },
+            paragraph1: {
+                type: 'string'
+            },
+            paragraph2: {
+                type: 'string'
+            },
+            paragraph3: {
+                type: 'string'
+            },
+            requestReviewBy: {
+                type: 'string',
+                format: 'date'
+            }
+        },
+        allOf: [
+            {
+                if: { required: ["paragraph2"] },
+                then: { required: ["paragraph1"] }
+            },
+            {
+                if: { required: ["paragraph3"] },
+                then: { required: ["paragraph2"] }
+            }
+        ]
+    }
 };
