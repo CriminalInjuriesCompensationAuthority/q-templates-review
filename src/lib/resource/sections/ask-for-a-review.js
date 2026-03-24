@@ -64,6 +64,7 @@ module.exports = {
             ],
             options: {
                 outputOrder: ['out-of-time-warning', 'ask-for-a-review'],
+                showSurvey: 'beta',
                 transformOrder: ['out-of-time-warning', 'ask-for-a-review'],
             },
         },
