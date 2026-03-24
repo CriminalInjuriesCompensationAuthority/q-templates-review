@@ -55,7 +55,7 @@ module.exports = {
             ],
             options: {
                 buttonText: 'Ask for a review',
-                showSurvey: true,
+                showSurvey: 'full',
                 showBackButton: false,
             },
         },

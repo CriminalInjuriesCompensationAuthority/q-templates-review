@@ -48,6 +48,9 @@ module.exports = {
                     'q-why-do-you-want-a-review': 12345,
                 },
             ],
+            options: {
+                showSurvey: 'beta',
+            },
         },
     },
     route: {

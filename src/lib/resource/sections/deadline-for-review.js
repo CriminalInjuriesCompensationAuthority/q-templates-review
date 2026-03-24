@@ -39,6 +39,9 @@ module.exports = {
                     'q-reason-for-missing-review-deadline': false,
                 },
             ],
+            options: {
+                showSurvey: 'beta',
+            },
         },
     },
     route: {

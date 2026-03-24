@@ -31,6 +31,8 @@ module.exports = {
             options: {
                 ordering: {},
                 buttonText: 'Accept and send',
+                showSurvey: 'beta',
+
                 pageContext: 'submission',
             },
         },

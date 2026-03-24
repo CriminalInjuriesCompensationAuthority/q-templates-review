@@ -43,6 +43,9 @@ module.exports = {
                     foo: 'bar',
                 },
             ],
+            options: {
+                showSurvey: 'beta',
+            },
         },
     },
     route: {
