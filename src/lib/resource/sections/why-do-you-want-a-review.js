@@ -9,15 +9,18 @@ module.exports = {
             properties: {
                 'q-why-do-you-want-a-review': {
                     type: 'string',
-                    title: 'Tell us why you want a review',
-                    description: `<p class="govuk-body">Explain why you do not agree with our decision. Let us know if you:</p>
+                    title: 'Your reason for wanting a review',
+                    description: `<p class="govuk-body">We need to know why you do not agree with our decision.</p>
+                        <p class="govuk-body">In your request for a review, things you might want to include are:</p>
                         <ul class='govuk-list govuk-list--bullet'>
-                        <li>do not think we’ve considered all the information you gave us</li>
-                        <li>think we’ve looked at the wrong information</li>
-                        <li>have any extra information you’d like to give us</li>
-                        <li>think our decision was wrong for another reason</li>
+                        <li>if you do not think we’ve considered all the information you gave us</li>
+                        <li>if you think we’ve looked at the wrong information</li>
+                        <li>any new information you’d like to give us</li>
+                        <li>if you think our decision was wrong for another reason</li>
                         </ul>
                         <p class="govuk-body">Do not include personal or financial information, like your National Insurance number or credit card details.</p>
+                        <h2 class="govuk-heading-m">Tell us why you want a review</h2>
+
                         `,
                     maxLength: 10000,
                     errorMessage: {

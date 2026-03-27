@@ -11,7 +11,6 @@ module.exports = {
                     title: 'Send supporting information',
                     description: `
                     <p class="govuk-body">If you have information to support your review request, you must send it to us by post or email.</p>
-                    <p class="govuk-body">You must do this by <b>11:59pm on ||/meta/personalisation/expiry-date||.</b></p>
                     <p class="govuk-body">It's fine to send us:</p>
                     <ul class='govuk-list govuk-list--bullet'>
                     <li>photocopies of documents</li>
