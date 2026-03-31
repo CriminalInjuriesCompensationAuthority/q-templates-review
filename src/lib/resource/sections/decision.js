@@ -46,7 +46,7 @@ module.exports = {
                     <h3 class="govuk-heading-s">What happens when you ask for a review</h3>
                     <p class="govuk-body">A different claims officer will make a new decision about your claim.</p>
                     <p class="govuk-body">We make most review decisions within 6 months. Sometimes it can take longer depending on the circumstances of your claim.</p>
-                    <p class="govuk-body">If oyu do not agree with the review decision, you can appeal to a tribunal.</p>
+                    <p class="govuk-body">If you do not agree with the review decision, you can appeal to a tribunal.</p>
                     <button type="submit" data-prevent-double-click="true" class="govuk-button govuk-button--start">Ask for a review</button>
                     <article class="moj-ticket-panel" aria-label="Sub navigation 1">
                     <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" aria-label="Section 1">
