@@ -129,7 +129,7 @@ module.exports = {
                     cond: ['==', '$.meta.personalisation.contact-method', 'email'],
                     // prettier-ignore
                     data: {
-                        templateId: '',
+                        templateId: '42b812dd-0fa6-48e5-a7cf-de7ae0bfc37c',
                         emailAddress:
                             '||/meta/personalisation/email-address||',
                         personalisation: {
@@ -145,7 +145,7 @@ module.exports = {
                     cond: ['==', '$.meta.personalisation.contact-method', 'sms'],
                     // prettier-ignore
                     data: {
-                        templateId: '',
+                        templateId: 'a5c5a52c-d99f-459e-ad53-cf5a6c24f1a9',
                         emailAddress:
                             '||/meta/personalisation/telephone-number||',
                         personalisation: {
@@ -163,12 +163,36 @@ module.exports = {
                 {
                     description: 'Review confirmation email',
                     type: 'sendEmail',
-                    cond: ['==', '$.meta.personalisation.contact-method', 'email'],
+                    cond: [
+                        'and',
+                        ['|role.all', 'inTime'],
+                        ['==', '$.meta.personalisation.contact-method', 'email'],
+                    ],
                     // prettier-ignore
                     data: {
-                        templateId: '',
+                        templateId: 'd0fca60f-3c94-4e09-8c99-a76b67d67476',
                         emailAddress:
                             '||/meta/personalisation/email-address||',
+                        personalisation: {
+                            caseReference: '||/answers/system/case-reference||',
+                            'review deadline': '||/answers/system/expiry-date||'
+                        },
+                        reference: null
+                    },
+                },
+                {
+                    description: 'Review confirmation text',
+                    type: 'sendSms',
+                    cond: [
+                        'and',
+                        ['|role.all', 'inTime'],
+                        ['==', '$.meta.personalisation.contact-method', 'sms'],
+                    ],
+                    // prettier-ignore
+                    data: {
+                        templateId: 'd7a9a257-2e04-40cf-b0e8-791d4e587704',
+                        phoneNumber:
+                            '||/meta/personalisation/telephone-number||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||'
                         },
@@ -176,13 +200,37 @@ module.exports = {
                     },
                 },
                 {
-                    description: 'Review confirmation email',
+                    description: 'Out of time review confirmation email',
                     type: 'sendEmail',
-                    cond: ['==', '$.meta.personalisation.contact-method', 'sms'],
+                    cond: [
+                        'and',
+                        ['|role.all', 'expired'],
+                        ['==', '$.meta.personalisation.contact-method', 'email'],
+                    ],
                     // prettier-ignore
                     data: {
-                        templateId: '',
+                        templateId: 'a7e93501-e7f3-4712-a9bf-2ef78ee03ad5',
                         emailAddress:
+                            '||/meta/personalisation/email-address||',
+                        personalisation: {
+                            caseReference: '||/answers/system/case-reference||',
+                            'review deadline': '||/answers/system/expiry-date||'
+                        },
+                        reference: null
+                    },
+                },
+                {
+                    description: 'Out of time review confirmation text',
+                    type: 'sendSms',
+                    cond: [
+                        'and',
+                        ['|role.all', 'expired'],
+                        ['==', '$.meta.personalisation.contact-method', 'sms'],
+                    ],
+                    // prettier-ignore
+                    data: {
+                        templateId: '780a3300-27ee-4bc0-93bd-9de646a12ae1',
+                        phoneNumber:
                             '||/meta/personalisation/telephone-number||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||'
@@ -236,7 +284,7 @@ module.exports = {
                     const: [
                         'dateCompare',
                         '$.answers.system.expiry-date', // this date ...
-                        '>=', // is more than or equal to ...
+                        '<=', // is less than or equal to ...
                         '-1', // 1 ...
                         'days', // day (before, due to the negative (-1)) ...
                         // today's date (no second date given. defaults to today's date).
