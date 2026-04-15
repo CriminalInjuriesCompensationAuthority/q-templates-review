@@ -57,9 +57,9 @@ module.exports = {
                     </section>
                     </article>
                     <h3 class="govuk-heading-m govuk-!-margin-bottom-0">More information</h3>
-                    <p class="govuk-body"><a href="" target="_blank" class="govuk-link">Read our guide to the Criminal Injuries Compensation Scheme<a>.</p>
+                    <p class="govuk-body"><a href="https://www.gov.uk/guidance/criminal-injuries-compensation-a-guide" target="_blank" class="govuk-link">Read our guide to the Criminal Injuries Compensation Scheme<a>.</p>
                     <h3 class="govuk-heading-m govuk-!-margin-bottom-0">Contact us</h3>
-                    <p class="govuk-body"><a href="" target="_blank" class="govuk-link">Contact us if you have any queries<a>.</p>
+                    <p class="govuk-body"><a href="https://contact-the-cica.form.service.justice.gov.uk/" target="_blank" class="govuk-link">Contact us if you have any queries<a>.</p>
                     `,
                 },
             },

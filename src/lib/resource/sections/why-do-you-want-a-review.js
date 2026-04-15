@@ -7,8 +7,7 @@ module.exports = {
             type: 'object',
             required: ['q-why-do-you-want-a-review'],
             properties: {
-                'q-why-do-you-want-a-review': {
-                    type: 'string',
+                'why-do-you-want-a-review-info': {
                     title: 'Your reason for wanting a review',
                     description: `<p class="govuk-body">We need to know why you do not agree with our decision.</p>
                         <p class="govuk-body">In your request for a review, things you might want to include are:</p>
@@ -18,10 +17,11 @@ module.exports = {
                         <li>any new information you’d like to give us</li>
                         <li>if you think our decision was wrong for another reason</li>
                         </ul>
-                        <p class="govuk-body">Do not include personal or financial information, like your National Insurance number or credit card details.</p>
-                        <h2 class="govuk-heading-m">Tell us why you want a review</h2>
-
-                        `,
+                        <p class="govuk-body">Do not include personal or financial information, like your National Insurance number or credit card details.</p>}`,
+                },
+                'q-why-do-you-want-a-review': {
+                    type: 'string',
+                    title: 'Tell us why you want a review',
                     maxLength: 10000,
                     errorMessage: {
                         maxLength: 'Reasons must be 10000 characters or less',
@@ -53,6 +53,18 @@ module.exports = {
             ],
             options: {
                 showSurvey: 'beta',
+                outputOrder: ['why-do-you-want-a-review-info', 'q-why-do-you-want-a-review'],
+                properties: {
+                    'q-why-do-you-want-a-review': {
+                        options: {
+                            macroOptions: {
+                                label: {
+                                    classes: 'govuk-label--m',
+                                },
+                            },
+                        },
+                    },
+                },
             },
         },
     },
