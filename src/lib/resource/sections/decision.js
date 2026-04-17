@@ -10,9 +10,9 @@ module.exports = {
                 'context-decison-letter': {
                     title: 'Decision about your application for compensation',
                     description: `
-                    <p class="govuk-body govuk-!-margin-bottom-0">||/meta/personalisation/first-name|| ||/meta/personalisation/last-name||</p>
+                    <p class="govuk-body govuk-!-margin-bottom-0">{{{ applicantForename }}} {{{ applicantSurname }}}</p>
                     <p class="govuk-body govuk-!-margin-bottom-0">Reference number: ||/answers/system/case-reference||</p>
-                    <p class="govuk-body">||/meta/personalisation/date||</p>
+                    <p class="govuk-body">{{{ dateSent }}}</p>
                     <p class="govuk-body">Thank you for your application for criminal injuries compensation.</p>
                     <p class="govuk-body"><b>Unfortunately, you are not eligible for compensation.</b></p>
                     <p class="govuk-body">We are sorry about the experience that led you to apply for compensation. We understand this decision may be upsetting.</p>
@@ -25,10 +25,16 @@ module.exports = {
                     <h2 class="govuk-heading-m">Why you are not eligible</h2>
                     <p class="govuk-body">To work out if you're eligible for compensation, a claims officer followed the rules in the <a href="https://assets.publishing.service.gov.uk/media/5d00c89ee5274a3cfa8a4ffe/criminal-injuries-compensation-scheme-2012.pdf" target="_blank" class="govuk-link">Criminal Injuries Compensation Scheme (opens in a new tab).<a></p>
                     <p class="govuk-body"><b>This is what the claims officer says about your claim</b></p>
-                    <p class="govuk-body">||/meta/personalisation/decision-reason||</p>
+                    <p class="govuk-body">{{{ shortExplanation }}}</p>
                     <h3 class="govuk-heading-s">Scheme rules which have affected your eligibility to receive an award</h3>
                     <p class="govuk-body">These specific rules in the Scheme apply to this decision.</p>
-                    <p class="govuk-body">||/meta/personalisation/decision-paragraphs||</p>
+                    <p class="govuk-body">{{{ paragraph1 }}}</p>
+                    {{{ if paragraph2 }}}
+                    <p class="govuk-body">{{{ paragraph2 }}}</p>
+                    {{{ endif }}}
+                    {{{ if paragraph3 }}}
+                    <p class="govuk-body">{{{ paragraph3 }}}</p>
+                    {{{ endif }}}
                     <h2 class="govuk-heading-m">What to do next</h2>
                     <p class="govuk-body">You should now decide if you accept this decision or not.</p>
                     <p class="govuk-body">If you accept this decision, you do not need to do anything.</p>
@@ -40,7 +46,7 @@ module.exports = {
                     <li>have any extra information you'd like to give us</li>
                     <li>think our decision was wrong for another reason</li>
                     </ul>
-                    <p class="govuk-body">The deadline for asking for a review is <b>11:59pm on ||/meta/personalisation/expiry-date||.</b></p>
+                    <p class="govuk-body">The deadline for asking for a review is <b>11:59pm on {{{ requestReviewBy }}}.</b></p>
                     <p class="govuk-body">We may be able to extend this date if there are exceptional circumstances.We can only extend the time limit once. Email or write to us if you need an extension to this date.</p>
                     <p class="govuk-body">You can ask for a review yourself. You do not need to pay someone to do this for you. If you choose to pay a legal representative, we cannot pay their fees.</p>
                     <h3 class="govuk-heading-s">What happens when you ask for a review</h3>

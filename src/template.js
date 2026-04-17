@@ -126,12 +126,12 @@ module.exports = {
                 {
                     description: 'Decision notification email',
                     type: 'sendEmail',
-                    cond: ['==', '$.meta.personalisation.contact-method', 'email'],
+                    cond: ['==', '$.answers.owner.contact-preference', 'email'],
                     // prettier-ignore
                     data: {
                         templateId: '42b812dd-0fa6-48e5-a7cf-de7ae0bfc37c',
                         emailAddress:
-                            '||/meta/personalisation/email-address||',
+                            '||/answers/owner/email||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',
                             content: 'https://claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/secure-link-login?uid=||/answers/owner/owner-id||&qid='
@@ -142,12 +142,12 @@ module.exports = {
                 {
                     description: 'Decision notification sms',
                     type: 'sendSms',
-                    cond: ['==', '$.meta.personalisation.contact-method', 'sms'],
+                    cond: ['==', '$.answers.owner.contact-preference', 'sms'],
                     // prettier-ignore
                     data: {
                         templateId: 'a5c5a52c-d99f-459e-ad53-cf5a6c24f1a9',
                         emailAddress:
-                            '||/meta/personalisation/telephone-number||',
+                            '||/answers/owner/phone||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',    
                             content: 'https://claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/secure-link-login?uid=||/answers/owner/owner-id||&qid='
@@ -166,13 +166,13 @@ module.exports = {
                     cond: [
                         'and',
                         ['|role.all', 'inTime'],
-                        ['==', '$.meta.personalisation.contact-method', 'email'],
+                        ['==', '$.answers.owner.contact-preference', 'email'],
                     ],
                     // prettier-ignore
                     data: {
                         templateId: 'd0fca60f-3c94-4e09-8c99-a76b67d67476',
                         emailAddress:
-                            '||/meta/personalisation/email-address||',
+                            '||/answers/owner/email||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',
                             'review deadline': '||/answers/system/expiry-date||'
@@ -186,13 +186,13 @@ module.exports = {
                     cond: [
                         'and',
                         ['|role.all', 'inTime'],
-                        ['==', '$.meta.personalisation.contact-method', 'sms'],
+                        ['==', '$.answers.owner.contact-preference', 'sms'],
                     ],
                     // prettier-ignore
                     data: {
                         templateId: 'd7a9a257-2e04-40cf-b0e8-791d4e587704',
                         phoneNumber:
-                            '||/meta/personalisation/telephone-number||',
+                            '||/answers/owner/phone||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||'
                         },
@@ -205,13 +205,13 @@ module.exports = {
                     cond: [
                         'and',
                         ['|role.all', 'expired'],
-                        ['==', '$.meta.personalisation.contact-method', 'email'],
+                        ['==', '$.answers.owner.contact-preference', 'email'],
                     ],
                     // prettier-ignore
                     data: {
                         templateId: 'a7e93501-e7f3-4712-a9bf-2ef78ee03ad5',
                         emailAddress:
-                            '||/meta/personalisation/email-address||',
+                            '||/answers/owner/email||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',
                             'review deadline': '||/answers/system/expiry-date||'
@@ -225,13 +225,13 @@ module.exports = {
                     cond: [
                         'and',
                         ['|role.all', 'expired'],
-                        ['==', '$.meta.personalisation.contact-method', 'sms'],
+                        ['==', '$.answers.owner.contact-preference', 'sms'],
                     ],
                     // prettier-ignore
                     data: {
                         templateId: '780a3300-27ee-4bc0-93bd-9de646a12ae1',
                         phoneNumber:
-                            '||/meta/personalisation/telephone-number||',
+                            '||/answers/owner/phone||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||'
                         },
