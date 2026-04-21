@@ -11,7 +11,7 @@ module.exports = {
                     title: 'Decision about your application for compensation',
                     description: `
                     <p class="govuk-body govuk-!-margin-bottom-0">{{{ applicantForename }}} {{{ applicantSurname }}}</p>
-                    <p class="govuk-body govuk-!-margin-bottom-0">Reference number: ||/answers/system/case-reference||</p>
+                    <p class="govuk-body govuk-!-margin-bottom-0">Reference number: {{{ caseReferenceNumber }}}</p>
                     <p class="govuk-body">{{{ dateSent }}}</p>
                     <p class="govuk-body">Thank you for your application for criminal injuries compensation.</p>
                     <p class="govuk-body"><b>Unfortunately, you are not eligible for compensation.</b></p>
