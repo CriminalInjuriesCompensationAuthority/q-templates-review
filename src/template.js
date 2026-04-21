@@ -145,11 +145,11 @@ module.exports = {
                     cond: ['==', '$.meta.personalisation.contact-method', 'sms'],
                     // prettier-ignore
                     data: {
-                        templateId: '',
+                        templateId: 'a5c5a52c-d99f-459e-ad53-cf5a6c24f1a9',
                         emailAddress:
                             '||/meta/personalisation/telephone-number||',
                         personalisation: {
-                            caseReference: 'a5c5a52c-d99f-459e-ad53-cf5a6c24f1a9',    
+                            caseReference: '||/answers/system/case-reference||',    
                             content: 'https://claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/secure-link-login?uid=||/answers/owner/owner-id||&qid='
 
                         },
