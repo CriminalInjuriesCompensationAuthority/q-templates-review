@@ -186,6 +186,7 @@ module.exports = {
                 link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--blue" style="margin-left:auto">VIEWED</strong>',
             },
         },
+        read: false,
     },
     attributes: {
         q__roles: {
