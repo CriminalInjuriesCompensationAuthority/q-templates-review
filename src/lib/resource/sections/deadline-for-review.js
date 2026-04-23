@@ -19,7 +19,7 @@ module.exports = {
                 },
                 'q-reason-for-missing-review-deadline': {
                     type: 'string',
-                    title: 'Tell us why you missed the deadline for asking for a review<',
+                    title: 'Tell us why you missed the deadline for asking for a review',
                     maxLength: 10000,
                     errorMessage: {
                         maxLength: 'Reasons must be 10000 characters or less',

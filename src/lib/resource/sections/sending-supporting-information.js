@@ -18,7 +18,7 @@ module.exports = {
                     <li>images of documents you have taken with a mobile phone</li>
                     </ul>
                     <p class="govuk-body">It's better to send us copies of documents instead of the originals.</p>
-                    <p class="govuk-body">You should include your CICA reference number on anything you send us. This is: ||/answers/system/case-reference||</p>
+                    <p class="govuk-body">You should include your CICA reference number on anything you send us. This is: <b>||/answers/system/case-reference||</b></p>
                     <div class="govuk-inset-text">
                         <h2 class="govuk-heading-m">Email</h2>
                         <p class="govuk-body"><a href="mailto:info@cica.gov.uk" target="_blank" rel="noopener noreferrer" class="govuk-link">info@cica.gov.uk</a></p>

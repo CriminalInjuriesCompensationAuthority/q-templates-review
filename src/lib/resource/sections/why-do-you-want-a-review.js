@@ -10,14 +10,14 @@ module.exports = {
                 'why-do-you-want-a-review-info': {
                     title: 'Your reason for wanting a review',
                     description: `<p class="govuk-body">We need to know why you do not agree with our decision.</p>
-                        <p class="govuk-body">In your request for a review, things you might want to include are:</p>
+                        <p class="govuk-body">In your request for a review, the sort of things you might want to include are:</p>
                         <ul class='govuk-list govuk-list--bullet'>
-                        <li>if you do not think we’ve considered all the information you gave us</li>
+                        <li>if you do not think we’ve looked at all the information you gave us</li>
                         <li>if you think we’ve looked at the wrong information</li>
                         <li>any new information you’d like to give us</li>
                         <li>if you think our decision was wrong for another reason</li>
                         </ul>
-                        <p class="govuk-body">Do not include personal or financial information, like your National Insurance number or credit card details.</p>}`,
+                        <p class="govuk-body">Do not include personal or financial information, like your National Insurance number or credit card details.</p>`,
                 },
                 'q-why-do-you-want-a-review': {
                     type: 'string',
