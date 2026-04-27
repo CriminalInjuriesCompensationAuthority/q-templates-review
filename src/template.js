@@ -134,7 +134,7 @@ module.exports = {
                             '||/answers/owner/email||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',
-                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/login?uid=||/answers/owner/owner-id||&target=||/answers/system/case-reference||'
+                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/login?uid=||/answers/owner/owner-id||&qid=||questionnaireId||&target=||/answers/system/case-reference||'
                         },
                         reference: null
                     },
@@ -150,7 +150,7 @@ module.exports = {
                             '||/answers/owner/phone||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',    
-                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/login?uid=||/answers/owner/owner-id||&target=||/answers/system/case-reference||'
+                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/login?uid=||/answers/owner/owner-id||&qid=||questionnaireId||&target=||/answers/system/case-reference||'
 
                         },
                         reference: null
@@ -313,6 +313,7 @@ module.exports = {
             },
         },
     },
+    // prettier-ignore
     "inputSchema": {
         "$id": "inputSchema:tx45",
         "$schema": "http://json-schema.org/draft-07/schema#",
@@ -392,5 +393,5 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
 };
