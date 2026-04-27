@@ -17,7 +17,7 @@ module.exports = {
                         <li>any new information you’d like to give us</li>
                         <li>if you think our decision was wrong for another reason</li>
                         </ul>
-                        <p class="govuk-body">Do not include personal or financial information, like your National Insurance number or credit card details.</p>}`,
+                        <p class="govuk-body">Do not include personal or financial information, like your National Insurance number or credit card details.</p>`,
                 },
                 'q-why-do-you-want-a-review': {
                     type: 'string',
