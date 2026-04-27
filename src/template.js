@@ -126,7 +126,7 @@ module.exports = {
                 {
                     description: 'Decision notification email',
                     type: 'sendEmail',
-                    cond: ['==', '$.answers.owner.contact-preference', 'email'],
+                    cond: ['==', '$.answers.owner.contact-preference', 'E'],
                     // prettier-ignore
                     data: {
                         templateId: '42b812dd-0fa6-48e5-a7cf-de7ae0bfc37c',
@@ -134,7 +134,7 @@ module.exports = {
                             '||/answers/owner/email||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',
-                            content: 'https://claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/secure-link-login?uid=||/answers/owner/owner-id||&qid='
+                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/login?uid=||/answers/owner/owner-id||&target=||/answers/system/case-reference||'
                         },
                         reference: null
                     },
@@ -142,7 +142,7 @@ module.exports = {
                 {
                     description: 'Decision notification sms',
                     type: 'sendSms',
-                    cond: ['==', '$.answers.owner.contact-preference', 'sms'],
+                    cond: ['==', '$.answers.owner.contact-preference', 'T'],
                     // prettier-ignore
                     data: {
                         templateId: 'a5c5a52c-d99f-459e-ad53-cf5a6c24f1a9',
@@ -150,7 +150,7 @@ module.exports = {
                             '||/answers/owner/phone||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',    
-                            content: 'https://claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/secure-link-login?uid=||/answers/owner/owner-id||&qid='
+                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/login?uid=||/answers/owner/owner-id||&target=||/answers/system/case-reference||'
 
                         },
                         reference: null
@@ -166,7 +166,7 @@ module.exports = {
                     cond: [
                         'and',
                         ['|role.all', 'inTime'],
-                        ['==', '$.answers.owner.contact-preference', 'email'],
+                        ['==', '$.answers.owner.contact-preference', 'E'],
                     ],
                     // prettier-ignore
                     data: {
@@ -186,7 +186,7 @@ module.exports = {
                     cond: [
                         'and',
                         ['|role.all', 'inTime'],
-                        ['==', '$.answers.owner.contact-preference', 'sms'],
+                        ['==', '$.answers.owner.contact-preference', 'T'],
                     ],
                     // prettier-ignore
                     data: {
@@ -205,7 +205,7 @@ module.exports = {
                     cond: [
                         'and',
                         ['|role.all', 'expired'],
-                        ['==', '$.answers.owner.contact-preference', 'email'],
+                        ['==', '$.answers.owner.contact-preference', 'E'],
                     ],
                     // prettier-ignore
                     data: {
@@ -225,7 +225,7 @@ module.exports = {
                     cond: [
                         'and',
                         ['|role.all', 'expired'],
-                        ['==', '$.answers.owner.contact-preference', 'sms'],
+                        ['==', '$.answers.owner.contact-preference', 'T'],
                     ],
                     // prettier-ignore
                     data: {
@@ -313,4 +313,84 @@ module.exports = {
             },
         },
     },
+    "inputSchema": {
+        "$id": "inputSchema:tx45",
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+            "caseReferenceNumber",
+            "applicantForename",
+            "applicantSurname",
+            "dateSent",
+            "shortExplanation",
+            "longExplanation",
+            "paragraph1",
+            "requestReviewBy"
+        ],
+        "properties": {
+            "caseReferenceNumber": {
+                "type": "string"
+            },
+            "applicantForename": {
+                "type": "string"
+            },
+            "applicantSurname": {
+                "type": "string"
+            },
+            "dateSent": {
+                "type": "string",
+                "format": "date"
+            },
+            "shortExplanation": {
+                "type": "string"
+            },
+            "longExplanation": {
+                "type": "string"
+            },
+            "paragraph1": {
+                "type": "string"
+            },
+            "paragraph2": {
+                "type": "string"
+            },
+            "paragraph3": {
+                "type": "string"
+            },
+            "requestReviewBy": {
+                "type": "string",
+                "format": "date"
+            },
+            "expiryDate": {
+                "type": "string",
+                "format": "date"
+            }
+        },
+        "allOf": [
+            {
+                "if": {
+                    "required": [
+                        "paragraph2"
+                    ]
+                },
+                "then": {
+                    "required": [
+                        "paragraph1"
+                    ]
+                }
+            },
+            {
+                "if": {
+                    "required": [
+                        "paragraph3"
+                    ]
+                },
+                "then": {
+                    "required": [
+                        "paragraph2"
+                    ]
+                }
+            }
+        ]
+    }
 };
