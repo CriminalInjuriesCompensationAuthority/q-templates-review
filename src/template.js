@@ -179,11 +179,11 @@ module.exports = {
         summaryBlocks: {
             read: {
                 condition: 'unopened',
-                link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--orange" style="margin-left:auto">TO DO</strong>',
+                link: '<a href="/apply/resume/||questionnaireId||?target=info-decision" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--orange" style="margin-left:auto">TO DO</strong>',
             },
             're-read': {
                 condition: 'viewed',
-                link: '<a href="/apply/resume/||questionnaireId||" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--blue" style="margin-left:auto">VIEWED</strong>',
+                link: '<a href="/apply/resume/||questionnaireId||?target=info-decision" class="govuk-link">Read our decision about your application</a><strong class="govuk-tag govuk-tag--blue" style="margin-left:auto">VIEWED</strong>',
             },
         },
         read: false,
