@@ -134,7 +134,7 @@ module.exports = {
                             '||/answers/owner/email||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',
-                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/login?uid=||/answers/owner/owner-id||&qid=||questionnaireId||&target=||/answers/system/case-reference||'
+                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/login?uid=||/answers/owner/owner-id||&qid=||id||&target=||/answers/system/case-reference||'
                         },
                         reference: null
                     },
@@ -146,11 +146,11 @@ module.exports = {
                     // prettier-ignore
                     data: {
                         templateId: 'a5c5a52c-d99f-459e-ad53-cf5a6c24f1a9',
-                        emailAddress:
+                        phoneNumber:
                             '||/answers/owner/phone||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',    
-                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/login?uid=||/answers/owner/owner-id||&qid=||questionnaireId||&target=||/answers/system/case-reference||'
+                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/apply/account/login?uid=||/answers/owner/owner-id||&qid=||id||&target=||/answers/system/case-reference||'
 
                         },
                         reference: null
