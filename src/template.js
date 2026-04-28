@@ -134,7 +134,7 @@ module.exports = {
                             '||/answers/owner/email||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',
-                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/account/login?uid=||/answers/owner/owner-id||&qid=||/id||&target=||/answers/system/case-reference||'
+                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/account/login?qid=||/id||&target=||/answers/system/case-reference||'
                         },
                         reference: null
                     },
@@ -150,7 +150,7 @@ module.exports = {
                             '||/answers/owner/phone||',
                         personalisation: {
                             caseReference: '||/answers/system/case-reference||',    
-                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/account/login?uid=||/answers/owner/owner-id||&qid=||/id||&target=||/answers/system/case-reference||'
+                            content: 'https://uat.claim-criminal-injuries-compensation.service.justice.gov.uk/account/login?qid=||/id||&target=||/answers/system/case-reference||'
 
                         },
                         reference: null
