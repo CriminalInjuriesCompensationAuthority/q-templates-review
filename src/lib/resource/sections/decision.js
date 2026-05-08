@@ -57,7 +57,7 @@ module.exports = {
                     <article class="moj-ticket-panel" aria-label="Sub navigation 1">
                     <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" aria-label="Section 1">
                         <h2 class="govuk-heading-l govuk-!-margin-bottom-4">Save this decision</h2>
-                        <p class="govuk-body"><a class="govuk-link" href="pdf-URL" target="_blank">Download as PDF ()</a></p>     
+                        <p class="govuk-body"><a class="govuk-link" href="/apply/letter/pdf" target="_blank">Download as PDF ()</a></p>     
                         <p class="govuk-body"><a class="govuk-link" href="/download/p--decision" target="_blank">Download as an accessible web page (HTML, )</a></p>                     
                         <p class="govuk-body"><a class="govuk-link" href="javascript:window.print()">Print your decision</a></p>                       
                     </section>
